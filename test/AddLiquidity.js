@@ -2121,9 +2121,9 @@ async function addLiquidityZETA() {
     console.log(`- Hạn chót: ${new Date(deadline * 1000).toLocaleString()}`);
 
     try {
-        console.log("🔄 Gửi giao dịch `addLiquidityETH`...");
+        console.log("🔄 Gửi giao dịch `addLiquidityZETA`...");
         
-        const tx = await routerContract.addLiquidityETH(
+        const tx = await routerContract.addLiquidityZETA(
             TOKEN_B,
             amountTokenDesired,
             amountTokenMin,
