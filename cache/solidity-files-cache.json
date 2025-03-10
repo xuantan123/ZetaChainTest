@@ -1,0 +1,942 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\Babylonian.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "f79b669c6a0aa3d3f501fb52800db1c3",
+      "sourceName": "contracts/factory/Babylonian.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Babylonian"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IERC20.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "c1daa20ba503533a624f17f777c966f9",
+      "sourceName": "contracts/factory/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\node_modules\\@uniswap\\lib\\contracts\\libraries\\TransferHelper.sol": {
+      "lastModificationDate": 1741599897168,
+      "contentHash": "7fad4038612c5f040ebd746a3e58e0db",
+      "sourceName": "@uniswap/lib/contracts/libraries/TransferHelper.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.6.0"
+      ],
+      "artifacts": [
+        "TransferHelper"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IWETH.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "69e3a909ea8ece795fac8929b9863b1f",
+      "sourceName": "contracts/factory/IWETH.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IWETH"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakePair.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "f5459891e0d69ebb3504e3dac1c369f7",
+      "sourceName": "contracts/factory/IPancakePair.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPancakePair"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeCallee.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "a8791cea885b1a0d1e99f41883ed1efa",
+      "sourceName": "contracts/factory/IPancakeCallee.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPancakeCallee"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeFactory.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "c217ae031ecdc5d5528629016b18c3e7",
+      "sourceName": "contracts/factory/IPancakeFactory.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPancakeFactory"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeERC20.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "43125fc584dd1cca67fa84a84142f1aa",
+      "sourceName": "contracts/factory/IPancakeERC20.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPancakeERC20"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeRouter02.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "4288485bffa4da7c4209babfd1456bee",
+      "sourceName": "contracts/factory/IPancakeRouter02.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IPancakeRouter01.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.2"
+      ],
+      "artifacts": [
+        "IPancakeRouter02"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeRouter01.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "8460748bcbb429176f73410a75abdda4",
+      "sourceName": "contracts/factory/IPancakeRouter01.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.6.2"
+      ],
+      "artifacts": [
+        "IPancakeRouter01"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\IPancakeMigrator.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "990fb187123d92df1e0e29ecd74183db",
+      "sourceName": "contracts/factory/IPancakeMigrator.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPancakeMigrator"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\Multicall.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "57f13507ede9c9500a1ddc70b031a2e4",
+      "sourceName": "contracts/Multicall.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "Multicall"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\ZetaToken.sol": {
+      "lastModificationDate": 1741571080630,
+      "contentHash": "97d7c25b7f780fc08a8e891edc096c1e",
+      "sourceName": "contracts/ZetaToken.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0 <=0.8.20",
+        "^0.8.18",
+        "^0.8.18",
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Context",
+        "IERC20",
+        "Ownable",
+        "Zetaworld"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakeRouter01.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "49e59e463de85c3522a5955e64752294",
+      "sourceName": "contracts/factory/PancakeRouter01.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/lib/contracts/libraries/TransferHelper.sol",
+        "./PancakeLibrary.sol",
+        "./IPancakeRouter01.sol",
+        "./IPancakeFactory.sol",
+        "./IERC20.sol",
+        "./IWETH.sol"
+      ],
+      "versionPragmas": [
+        "=0.6.6"
+      ],
+      "artifacts": [
+        "PancakeRouter01"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakeLibrary.sol": {
+      "lastModificationDate": 1741600187146,
+      "contentHash": "cf2d6da95b202c47681cdf3fc51b1893",
+      "sourceName": "contracts/factory/PancakeLibrary.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SafeMath.sol",
+        "./IPancakeFactory.sol",
+        "./IPancakePair.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "PancakeLibrary"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\SafeMath.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "8d1c52ee053e6ea50630cdd67379f241",
+      "sourceName": "contracts/factory/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0 <0.7.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakeRouter.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "a2a65c69ef20e5c60affe4f84788ea41",
+      "sourceName": "contracts/factory/PancakeRouter.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/lib/contracts/libraries/TransferHelper.sol",
+        "./IPancakeRouter02.sol",
+        "./IPancakeFactory.sol",
+        "./PancakeLibrary.sol",
+        "./SafeMath.sol",
+        "./IERC20.sol",
+        "./IWETH.sol"
+      ],
+      "versionPragmas": [
+        "=0.6.6"
+      ],
+      "artifacts": [
+        "PancakeRouter"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\ZetaSwapRouter.sol": {
+      "lastModificationDate": 1741600184216,
+      "contentHash": "a5099a5729debc1636c2d0f896b25a50",
+      "sourceName": "contracts/ZetaSwapRouter.sol",
+      "solcConfig": {
+        "version": "0.6.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0 <=0.6.6"
+      ],
+      "artifacts": [
+        "IBEP20",
+        "IWZETA",
+        "IZetaSwapFactory",
+        "IZetaSwapPair",
+        "IZetaSwapRouter",
+        "SafeMath",
+        "TransferHelper",
+        "ZetaSwapLibrary",
+        "ZetaSwapRouter"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakePair.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "1048fddb77f890996b4624b55e88025a",
+      "sourceName": "contracts/factory/PancakePair.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IPancakePair.sol",
+        "./PancakeERC20.sol",
+        "./Math.sol",
+        "./UQ112x112.sol",
+        "./IERC20.sol",
+        "./IPancakeFactory.sol",
+        "./IPancakeCallee.sol"
+      ],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "PancakePair"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakeERC20.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "640786368a0d5beacc5bce584e24a3c3",
+      "sourceName": "contracts/factory/PancakeERC20.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IPancakeERC20.sol",
+        "./SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "PancakeERC20"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\Math.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "82676f5cefc482a167096f7087a32a6d",
+      "sourceName": "contracts/factory/Math.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "Math"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\UQ112x112.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "ae00c5d1575a72dd374e925f90d94650",
+      "sourceName": "contracts/factory/UQ112x112.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "UQ112x112"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\PancakeFactory.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "22d861daf97da3e66b5c2224fcbad80c",
+      "sourceName": "contracts/factory/PancakeFactory.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IPancakeFactory.sol",
+        "./PancakePair.sol"
+      ],
+      "versionPragmas": [
+        "=0.5.16"
+      ],
+      "artifacts": [
+        "PancakeFactory"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\factory\\WBNB.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "11bd83acdb249d71908ea9b9094681ac",
+      "sourceName": "contracts/factory/WBNB.sol",
+      "solcConfig": {
+        "version": "0.4.18",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.4.18"
+      ],
+      "artifacts": [
+        "WBNB"
+      ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\WFTM.sol": {
+      "lastModificationDate": 1741597646399,
+      "contentHash": "2eb242ab0c04d1fc860cb6ddf77b349b",
+      "sourceName": "contracts/WFTM.sol",
+      "solcConfig": {
+        "version": "0.4.18",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.4.18"
+      ],
+      "artifacts": [
+        "WFTM"
+      ]
+    }
+  }
+}
