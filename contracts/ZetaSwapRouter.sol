@@ -3,6 +3,8 @@
 */
 
 pragma solidity >=0.5.0 <=0.6.6;
+pragma experimental ABIEncoderV2;
+
 
 interface IZetaSwapFactory {
     event PairCreated(address indexed token0, address indexed token1, address pair, uint256);
@@ -1241,5 +1243,23 @@ contract ZetaSwapRouter is IZetaSwapRouter {
         returns (uint256[] memory amounts)
     {
         return ZetaSwapLibrary.getAmountsIn(factory, amountOut, path);
+    }
+
+    /// @notice Multicall enables calling multiple methods in a single call to the contract
+    /// @param data The encoded function data for each call
+    /// @return results The results from each function call
+    function multicall(bytes[] calldata data) external payable returns (bytes[] memory results) {
+        results = new bytes[](data.length);
+        for (uint256 i = 0; i < data.length; i++) {
+            (bool success, bytes memory result) = address(this).delegatecall(data[i]);
+            if (!success) {
+                // Next line handles revert messages properly
+                assembly {
+                    revert(add(result, 32), mload(result))
+                }
+            }
+            results[i] = result;
+        }
+        return results;
     }
 }

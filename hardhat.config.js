@@ -43,4 +43,19 @@ module.exports = {
       chainId: 7001,
     },
   },
+  etherscan: {
+    apiKey: {
+      'zetachain-testnet': 'empty'
+    },
+    customChains: [
+      {
+        network: "zetachain-testnet",
+        chainId: 7001,
+        urls: {
+          apiURL: "https://zetachain-testnet.blockscout.com/api",
+          browserURL: "https://zetachain-testnet.blockscout.com"
+        }
+      }
+    ]
+  }
 };
