@@ -3,8 +3,6 @@
 */
 
 pragma solidity >=0.5.0 <=0.6.6;
-pragma experimental ABIEncoderV2;
-
 
 interface IZetaSwapFactory {
     event PairCreated(address indexed token0, address indexed token1, address pair, uint256);
@@ -353,7 +351,8 @@ library ZetaSwapLibrary {
         amounts = new uint256[](path.length);
         amounts[0] = amountIn;
         for (uint256 i; i < path.length - 1; i++) {
-            (uint256 reserveIn, uint256 reserveOut) = getReserves(factory, path[i], path[i + 1]);
+            (uint256 reserveIn, uint256 reserveOut) = getReserves(
+                factory, path[i], path[i + 1]);
             amounts[i + 1] = getAmountOut(amounts[i], reserveIn, reserveOut);
         }
     }
@@ -1001,8 +1000,14 @@ contract ZetaSwapRouter is IZetaSwapRouter {
             (uint256 amount0Out, uint256 amount1Out) = input == token0
                 ? (uint256(0), amountOut)
                 : (amountOut, uint256(0));
-            address to = i < path.length - 2 ? ZetaSwapLibrary.pairFor(factory, output, path[i + 2]) : _to;
-            IZetaSwapPair(ZetaSwapLibrary.pairFor(factory, input, output)).swap(amount0Out, amount1Out, to);
+            address to = i < path.length - 2 
+                ? ZetaSwapLibrary.pairFor(factory, output, path[i + 2]) 
+                : _to;
+            IZetaSwapPair(ZetaSwapLibrary.pairFor(factory, input, output)).swap(
+                amount0Out, 
+                amount1Out, 
+                to
+            );
         }
     }
 
@@ -1047,12 +1052,25 @@ contract ZetaSwapRouter is IZetaSwapRouter {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external virtual override payable ensure(deadline) returns (uint256[] memory amounts) {
+    ) 
+    external 
+    virtual 
+    override 
+    payable 
+    ensure(deadline) 
+    returns (uint256[] memory amounts) 
+    {
         require(path[0] == WZETA, 'ZetaSwapRouter: INVALID_PATH');
         amounts = ZetaSwapLibrary.getAmountsOut(factory, msg.value, path);
-        require(amounts[amounts.length - 1] >= amountOutMin, 'ZetaSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT');
+        require(
+            amounts[amounts.length - 1] >= amountOutMin, 
+            'ZetaSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT'
+            );
         IWZETA(WZETA).deposit{value: amounts[0]}();
-        assert(IWZETA(WZETA).transfer(ZetaSwapLibrary.pairFor(factory, path[0], path[1]), amounts[0]));
+        assert(
+            IWZETA(WZETA).transfer(
+                ZetaSwapLibrary.pairFor(factory, path[0], path[1]),
+                amounts[0]));
         _swap(amounts, path, to);
     }
 
@@ -1243,23 +1261,5 @@ contract ZetaSwapRouter is IZetaSwapRouter {
         returns (uint256[] memory amounts)
     {
         return ZetaSwapLibrary.getAmountsIn(factory, amountOut, path);
-    }
-
-    /// @notice Multicall enables calling multiple methods in a single call to the contract
-    /// @param data The encoded function data for each call
-    /// @return results The results from each function call
-    function multicall(bytes[] calldata data) external payable returns (bytes[] memory results) {
-        results = new bytes[](data.length);
-        for (uint256 i = 0; i < data.length; i++) {
-            (bool success, bytes memory result) = address(this).delegatecall(data[i]);
-            if (!success) {
-                // Next line handles revert messages properly
-                assembly {
-                    revert(add(result, 32), mload(result))
-                }
-            }
-            results[i] = result;
-        }
-        return results;
     }
 }
