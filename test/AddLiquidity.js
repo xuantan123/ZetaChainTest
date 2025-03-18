@@ -8,7 +8,7 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider); // Thay PRI
 const FACTORY_ADDRESS = "0x41ddd160846C1890B0Ae10b0110CA7320f61E837"; // Địa chỉ Factory Contract
 const ROUTER_ADDRESS = "0x8fA594a4f85D1eD88557826219B43a1e74265a72"; // Địa chỉ Router Contract
 const TOKEN_A = "0x5F0b1a82749cb4E2278EC87F8BF6B618dC71a8bf"; // Địa chỉ WZETA
-const TOKEN_B = "0x751bAedcC6e4C70D0D0BeCA920E2db5122088c68"; // Địa chỉ ZTW
+const TOKEN_B = "0x92f0656Bb0CE869F39d91E9E12419d6255bf5507"; // Địa chỉ ZTW
 
 
 const factoryABI = [
@@ -1191,7 +1191,7 @@ const routerABI = [
     "stateMutability": "payable",
     "type": "receive"
   }
-];  // ABI của Router Contract
+  ];  // ABI của Router Contract
   const WZETA_ABI = [
     {
       "constant": true,
@@ -2101,12 +2101,12 @@ async function addLiquidityZETA() {
     const userAddress = await signer.getAddress();
     
     // Sử dụng số lượng token cực nhỏ
-    const amountTokenDesired = ethers.utils.parseUnits("1000", 18);   // 10 ZTW
-    const amountZETA = ethers.utils.parseUnits("0.01", 18);   // 0.01 ZETA
+    const amountTokenDesired = ethers.utils.parseUnits("10000", 18);   // 10 ZTW
+    const amountZETA = ethers.utils.parseUnits("1", 18);   // 0.01 ZETA
     
     // Tăng slippage lên 90%
     const amountTokenMin = ethers.utils.parseUnits("100", 18);  // 10% của 10 ZTW
-    const amountZETAMin = ethers.utils.parseUnits("0.001", 18); // 10% của 0.01 ZETA
+    const amountZETAMin = ethers.utils.parseUnits("0.1", 18); // 10% của 0.01 ZETA
     
     // Tăng deadline lên 24 giờ
     const deadline = Math.floor(Date.now() / 1000) + 60 * 60 * 24;

@@ -1,9 +1,8 @@
 const { ethers } = require("hardhat");
 
-// Địa chỉ contract
-const ZetaFarmAddress = "0x8CDEf4439Ca55Ee0FA45128122695879e96f56e6"; // ZetaFarm
-const lpTokenAddress = "0x4766d2999cfefeF94DB449e923F050B7F9e74161"; // LP Token
-// ABI
+const ZetaFarmAddress = "0x2d5a778d313E3CbC2Db0B30451F37350bF131D69"; 
+const lpTokenAddress = "0x2EB91344E9d094DbAd4E28b942Aa5A11788A26fe"; 
+
 const ZetaFarmABI = [
     {
       "inputs": [
@@ -1001,107 +1000,54 @@ const ZetaFarmABI = [
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ]; // Thay thế bằng ABI của ZetaFarm
+  ];
 const ERC20_ABI = [
     "function balanceOf(address owner) view returns (uint256)",
     "function approve(address spender, uint256 amount) external returns (bool)",
-]; // Thay thế bằng ABI ERC20 chuẩn
+]; 
 
 async function main() {
   const [signer] = await ethers.getSigners();
   const ZetaFarm = new ethers.Contract(ZetaFarmAddress, ZetaFarmABI, signer);
   const lpToken = new ethers.Contract(lpTokenAddress, ERC20_ABI, signer);
 
-  const pid = 0;
-  const amount = ethers.utils.parseUnits("0.001", 18);
-
-  // 📌 Kiểm tra số dư LP Token của user
-  let userBalance = await lpToken.balanceOf(signer.address);
-  console.log(`🔍 Số dư LP của bạn: ${ethers.utils.formatUnits(userBalance, 18)}`);
-
-  // 📌 Kiểm tra phần thưởng đang chờ
-  let pendingReward = await ZetaFarm.pendingCake(pid, signer.address);
-  console.log(`🎁 Phần thưởng đang chờ: ${ethers.utils.formatUnits(pendingReward, 18)} token`);
-
-  // 📌 Kiểm tra xem pool đã tồn tại chưa (nếu chưa, thêm mới)
-  try {
-    await ZetaFarm.poolInfo(pid);
-  } catch (error) {
-    console.log("⏳ Thêm Pool mới...");
-    let tx = await ZetaFarm.add(1, lpTokenAddress, true, false);
-    await tx.wait();
-    console.log("✅ Pool đã được thêm!");
+  let totalPools = await ZetaFarm.poolLength();
+  console.log(`🔍 Tổng số Pool hiện có: ${totalPools.toString()}`);
+  if (totalPools.toNumber() === 1) {
+  console.log("⏳ Thêm Pool mới...");
+  let tx = await ZetaFarm.add(
+    1,              
+    lpTokenAddress,  
+    true,            
+    false            
+  );
+  await tx.wait();
+  console.log("✅ Pool mới đã được thêm!");
   }
 
-  // 📌 Cấp quyền cho ZetaFarm sử dụng LP Token của user
+  totalPools = await ZetaFarm.poolLength();
+  console.log(`🔍 Tổng số Pool sau khi thêm: ${totalPools.toString()}`);
+  const pid = 1;
+  const amount = ethers.utils.parseUnits("0.0001", 18);
+
   console.log(`⏳ Cấp quyền gửi ${ethers.utils.formatUnits(amount, 18)} LP Token vào ZetaFarm...`);
   let tx = await lpToken.approve(ZetaFarmAddress, amount);
   await tx.wait();
   console.log("✅ Đã cấp quyền!");
 
-  // 📌 Gửi token LP vào farm
   console.log("⏳ Gửi token LP vào farm...");
-  tx = await ZetaFarm.deposit(pid, amount);
+  tx = await ZetaFarm.deposit(
+    pid, 
+    amount,
+    {     
+      gasLimit: 2000000,
+      gasPrice: ethers.utils.parseUnits("20", "gwei"),
+    }
+  );
   await tx.wait();
   console.log("✅ Đã gửi thành công!");
-
-  // 📌 Kiểm tra phần thưởng sau khi gửi
-  pendingReward = await ZetaFarm.pendingCake(pid, signer.address);
-  console.log(`🎁 Phần thưởng sau deposit: ${ethers.utils.formatUnits(pendingReward, 18)} token`);
-
-  // 📌 Kiểm tra số dư trong farm
-  let userInfo = await ZetaFarm.userInfo(pid, signer.address);
-  console.log(`🔍 LP Token trong farm sau deposit: ${ethers.utils.formatUnits(userInfo.amount, 18)}`);
-
-  // 📌 Chờ 10 giây để farm cập nhật phần thưởng
-  console.log("⏳ Chờ 10 giây để farm cập nhật phần thưởng...");
-  await new Promise((resolve) => setTimeout(resolve, 10000));
-
-  // 📌 Cập nhật Pool trước khi rút
-  try {
-    console.log("⏳ Cập nhật pool trước khi rút...");
-    tx = await ZetaFarm.massUpdatePools();
-    await tx.wait();
-    console.log("✅ Đã cập nhật pool!");
-  } catch (error) {
-    console.error("❌ Lỗi khi cập nhật pool:", error);
-  }
-
-  // 📌 Kiểm tra phần thưởng trước khi rút
-  pendingReward = await ZetaFarm.pendingCake(pid, signer.address);
-  console.log(`🎁 Phần thưởng trước khi rút: ${ethers.utils.formatUnits(pendingReward, 18)} token`);
-
-  // 📌 Kiểm tra số dư trong farm
-  userInfo = await ZetaFarm.userInfo(pid, signer.address);
-  console.log(`🔍 Số LP Token trong farm: ${ethers.utils.formatUnits(userInfo.amount, 18)}`);
-
-  // 📌 Chỉ rút nếu có LP Token trong farm
-  if (userInfo.amount.gt(ethers.constants.Zero)) {
-    try {
-      console.log("⏳ Rút token LP từ farm...");
-      let withdrawAmount = userInfo.amount.lt(amount) ? userInfo.amount : amount;
-      tx = await ZetaFarm.withdraw(pid, withdrawAmount);
-      await tx.wait();
-      console.log("✅ Đã rút thành công!");
-    } catch (error) {
-      console.error("❌ Lỗi khi rút:");
-      console.error(`🔍 Lý do lỗi: ${error.reason || "Không xác định"}`);
-      console.error(`🔍 Chi tiết lỗi: ${JSON.stringify(error, null, 2)}`);
-    }
-  } else {
-    console.log("❌ Không thể rút: User không có LP Token trong farm.");
-  }
-
-  // 📌 Kiểm tra phần thưởng sau khi rút
-  pendingReward = await ZetaFarm.pendingCake(pid, signer.address);
-  console.log(`🎁 Phần thưởng sau khi rút: ${ethers.utils.formatUnits(pendingReward, 18)} token`);
-
-  // 📌 Kiểm tra lại số dư trong farm sau khi rút
-  userInfo = await ZetaFarm.userInfo(pid, signer.address);
-  console.log(`🔍 LP Token trong farm sau withdraw: ${ethers.utils.formatUnits(userInfo.amount, 18)}`);
 }
 
-// Chạy script
 main().catch((error) => {
   console.error("❌ Lỗi:", error);
 });

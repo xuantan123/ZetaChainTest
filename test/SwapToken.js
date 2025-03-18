@@ -8,7 +8,7 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider); // Thay PRI
 const FACTORY_ADDRESS = "0x41ddd160846C1890B0Ae10b0110CA7320f61E837"; // Địa chỉ Factory Contract
 const ROUTER_ADDRESS = "0x8fA594a4f85D1eD88557826219B43a1e74265a72"; // Địa chỉ Router Contract
 const WZETA = "0x5F0b1a82749cb4E2278EC87F8BF6B618dC71a8bf"; // Địa chỉ WZETA
-const TOKEN_B = "0x751bAedcC6e4C70D0D0BeCA920E2db5122088c68"; // Địa chỉ ZTW
+const TOKEN_B = "0x92f0656Bb0CE869F39d91E9E12419d6255bf5507"; // Địa chỉ ZTW
 
 
 const factoryABI = [
