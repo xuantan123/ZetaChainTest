@@ -989,6 +989,60 @@
       "artifacts": [
         "WFTM"
       ]
+    },
+    "D:\\ZetaChain\\ZetaChainTest\\contracts\\ZetaStake.sol": {
+      "lastModificationDate": 1742268719167,
+      "contentHash": "1b106c5882a149822b138a4f93659626",
+      "sourceName": "contracts/ZetaStake.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0",
+        "^0.8.0",
+        "^0.8.0",
+        ">=0.4.0",
+        "^0.8.0",
+        "^0.8.0",
+        "^0.8.0",
+        "^0.8.0",
+        "^0.8.0",
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Address",
+        "Context",
+        "IBoostContract",
+        "IERC20",
+        "IMasterChefV2",
+        "IVCake",
+        "Ownable",
+        "Pausable",
+        "SafeERC20",
+        "ZetaPool"
+      ]
     }
   }
 }

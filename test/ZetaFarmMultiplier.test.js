@@ -1010,53 +1010,16 @@ async function main() {
   const [signer] = await ethers.getSigners();
   const ZetaFarm = new ethers.Contract(ZetaFarmAddress, ZetaFarmABI, signer);
   const lpToken = new ethers.Contract(lpTokenAddress, ERC20_ABI, signer);
-
-  let totalPools = await ZetaFarm.poolLength();
-  console.log(`🔍 Total Pools Available: ${totalPools.toString()}`);
-
-  const isWhitelisted = await ZetaFarm.whiteList(signer.address);
-  console.log(`🔍 Are you on the whitelist?? ${isWhitelisted}`);
-
-  console.log("⏳ Add to whitelist...");
-  WhiteList = await ZetaFarm.updateWhiteList(signer.address,true);
-  await WhiteList.wait();
-  console.log("✅ Added to whitelist!");
-
-  if (totalPools.toNumber() === 1) {
-  console.log("⏳ Thêm Pool mới...");
-  let tx = await ZetaFarm.add(
-    1,              
-    lpTokenAddress,  
-    true,            
-    false            
-  );
-  await tx.wait();
-  console.log("✅ New Pool has been added!");
-  }
-  totalPools = await ZetaFarm.poolLength();
-  console.log(`🔍 Total Pool after adding: ${totalPools.toString()}`);
-  const pid = 1;
-  const amount = ethers.utils.parseUnits("0.0001", 18);
-
-  const pool = await ZetaFarm.poolInfo(pid);
-
-  console.log(`🔍 Pool #${pid} Info:`);
-  console.log(`   🟢 allocPoint: ${pool.allocPoint.toString()}`);
-  console.log(`   🟢 lastRewardTimestamp: ${pool.lastRewardTimestamp.toString()}`);
-  console.log(`   🟢 accCakePerShare: ${pool.accCakePerShare.toString()}`);
-  console.log(`   🟢 totalBoostedShare: ${pool.totalBoostedShare.toString()}`);
-  console.log(`   🟢 isRegular: ${pool.isRegular}`);
-
   
-  console.log(`⏳ Grant permission to send ${ethers.utils.formatUnits(amount, 18)} LP Token into ZetaFarm...`);
-  let tx = await lpToken.approve(ZetaFarmAddress, amount);
-  await tx.wait();
-  console.log("✅ Permission granted!");
+  const pid = 1;             
+  const allocPoint = 20;     
+  const withUpdate = false;
 
-  console.log("⏳ Send LP tokens to farm...");
-  tx = await ZetaFarm.deposit(
+  console.log("⏳ Cập nhật pool với set()...");
+  tx = await ZetaFarm.set(
     pid, 
-    amount,
+    allocPoint,
+    withUpdate,
     {     
       gasLimit: 2000000,
       gasPrice: ethers.utils.parseUnits("20", "gwei"),
