@@ -1012,7 +1012,14 @@ async function main() {
     const ZetaFarm = new ethers.Contract(ZetaFarmAddress, ZetaFarmABI, signer);
   
     const pid = 1;
-    
+    const pool = await ZetaFarm.poolInfo(pid);
+
+  console.log(`🔍 Pool #${pid} Info:`);
+  console.log(`   🟢 allocPoint: ${pool.allocPoint.toString()}`);
+  console.log(`   🟢 lastRewardTimestamp: ${pool.lastRewardTimestamp.toString()}`);
+  console.log(`   🟢 accCakePerShare: ${pool.accCakePerShare.toString()}`);
+  console.log(`   🟢 totalBoostedShare: ${pool.totalBoostedShare.toString()}`);
+  console.log(`   🟢 isRegular: ${pool.isRegular}`);
     // 📌 Kiểm tra số dư trong farm trước khi rút
     let userInfo = await ZetaFarm.userInfo(pid, signer.address);
     console.log(`🔍 Số LP Token trong farm: ${ethers.utils.formatUnits(userInfo.amount, 18)}`);

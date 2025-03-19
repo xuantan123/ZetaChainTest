@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 
-const ZetaFarmAddress = "0x2d5a778d313E3CbC2Db0B30451F37350bF131D69"; 
-const lpTokenAddress = "0x2EB91344E9d094DbAd4E28b942Aa5A11788A26fe"; 
+const ZetaFarmAddress = "0x2d5a778d313E3CbC2Db0B30451F37350bF131D69"; //contract Farm
+const lpTokenAddress = "0x2EB91344E9d094DbAd4E28b942Aa5A11788A26fe"; //contract Pair
 
 const ZetaFarmABI = [
     {
@@ -1017,29 +1017,32 @@ async function main() {
   const isWhitelisted = await ZetaFarm.whiteList(signer.address);
   console.log(`🔍 Are you on the whitelist?? ${isWhitelisted}`);
 
-  console.log("⏳ Add to whitelist...");
-  WhiteList = await ZetaFarm.updateWhiteList(signer.address,true);
-  await WhiteList.wait();
-  console.log("✅ Added to whitelist!");
+  if (!isWhitelisted) {
+    console.log("⏳ Adding to whitelist...");
+    let tx = await ZetaFarm.updateWhiteList(signer.address, true);
+    await tx.wait();
+    console.log("✅ Added to whitelist!");
+  }
 
   if (totalPools.toNumber() === 1) {
-  console.log("⏳ Thêm Pool mới...");
-  let tx = await ZetaFarm.add(
-    1,              
-    lpTokenAddress,  
-    true,            
-    false            
-  );
-  await tx.wait();
-  console.log("✅ New Pool has been added!");
+    console.log("⏳ Adding new pool...");
+    let tx = await ZetaFarm.add(
+      1,               // allocPoint
+      lpTokenAddress,  // LP Token Address
+      true,            // withUpdate
+      false            // isRegular
+    );
+    await tx.wait();
+    console.log("✅ New Pool has been added!");
   }
+
   totalPools = await ZetaFarm.poolLength();
   console.log(`🔍 Total Pool after adding: ${totalPools.toString()}`);
+
   const pid = 1;
   const amount = ethers.utils.parseUnits("0.0001", 18);
 
   const pool = await ZetaFarm.poolInfo(pid);
-
   console.log(`🔍 Pool #${pid} Info:`);
   console.log(`   🟢 allocPoint: ${pool.allocPoint.toString()}`);
   console.log(`   🟢 lastRewardTimestamp: ${pool.lastRewardTimestamp.toString()}`);
@@ -1047,13 +1050,12 @@ async function main() {
   console.log(`   🟢 totalBoostedShare: ${pool.totalBoostedShare.toString()}`);
   console.log(`   🟢 isRegular: ${pool.isRegular}`);
 
-  
-  console.log(`⏳ Grant permission to send ${ethers.utils.formatUnits(amount, 18)} LP Token into ZetaFarm...`);
+  console.log(`⏳ Granting permission to send ${ethers.utils.formatUnits(amount, 18)} LP Token into ZetaFarm...`);
   let tx = await lpToken.approve(ZetaFarmAddress, amount);
   await tx.wait();
   console.log("✅ Permission granted!");
 
-  console.log("⏳ Send LP tokens to farm...");
+  console.log("⏳ Sending LP tokens to farm...");
   tx = await ZetaFarm.deposit(
     pid, 
     amount,
@@ -1066,8 +1068,20 @@ async function main() {
   console.log("✅ Sent successfully!");
 
   console.log("⏳ Checking Boost Multiplier...");
-  let boostMultiplier = await ZetaFarm.getBoostMultiplier(signer.address,pid);
+  let boostMultiplier = await ZetaFarm.getBoostMultiplier(signer.address, pid);
   console.log(`✅ Boost Multiplier: ${boostMultiplier.toString()}`);
+
+  console.log("⏳ Harvesting rewards...");
+  tx = await ZetaFarm.deposit(
+    pid, 
+    ethers.utils.parseUnits("0", 18), // Gửi 0 LP để chỉ thu hoạch phần thưởng
+    {     
+      gasLimit: 2000000,
+      gasPrice: ethers.utils.parseUnits("20", "gwei"),
+    }
+  );
+  await tx.wait();
+  console.log("✅ Harvest completed!");
 }
 
 main().catch((error) => {
