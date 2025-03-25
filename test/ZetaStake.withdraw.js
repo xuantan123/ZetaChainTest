@@ -1583,19 +1583,32 @@ const ZetaStakeABI = [
     }
   ];
 
-async function main() {
-  const [signer] = await ethers.getSigners();
-  const ZetaStake = new ethers.Contract(ZetaStakeAddress, ZetaStakeABI, signer);
+  async function main() {
+    const [signer] = await ethers.getSigners();
+    const ZetaStake = new ethers.Contract(ZetaStakeAddress, ZetaStakeABI, signer);
   
-  const userInfo = await ZetaStake.userInfo(signer.address);
-  console.log("📌 Actual lockEndTime from contract:", userInfo.lockEndTime.toString());
-
-  console.log(`⏳ withdrawAll : `);
-  tx = await ZetaStake.withdrawAll();
-  await tx.wait();
-  console.log("✅ withdrawAll successful!");
-}
-
+    // Lấy thời gian hiện tại (tính theo giây)
+    const currentTime = Math.floor(Date.now() / 1000);
+  
+    // Lấy thông tin người dùng từ smart contract
+    const userInfo = await ZetaStake.userInfo(signer.address);
+    console.log("📌 Actual lockEndTime from contract:", userInfo.lockEndTime.toString());
+    console.log("⏳ Current time:", currentTime);
+  
+    // Kiểm tra nếu đã hết thời gian khóa
+    if (currentTime < userInfo.lockEndTime) {
+      console.log("🚨 Cannot withdraw yet. Still in lock period.");
+      return;
+    }
+  
+    console.log("✅ Lock period ended. Proceeding with withdrawal...");
+  
+    console.log(`⏳ withdrawAll :`);
+    const tx = await ZetaStake.withdrawAll();
+    await tx.wait();
+    console.log("✅ withdrawAll successful!");
+  }
+  
 main().catch((error) => {
   console.error("❌ Lỗi:", error);
 });

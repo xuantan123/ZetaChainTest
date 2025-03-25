@@ -1197,7 +1197,7 @@ const factoryContract = new ethers.Contract(FACTORY_ADDRESS, factoryABI, wallet)
 async function removeLiquidity() {
     try {
         const WETH = "0x5F0b1a82749cb4E2278EC87F8BF6B618dC71a8bf";
-        const token = "0x751bAedcC6e4C70D0D0BeCA920E2db5122088c68"; 
+        const token = "0x92f0656Bb0CE869F39d91E9E12419d6255bf5507"; 
         const liquidity = ethers.utils.parseUnits("0.2", 18);
         const amountTokenMin = ethers.utils.parseUnits("0", 18);
         const amountETHMin = ethers.utils.parseUnits("0", 18);

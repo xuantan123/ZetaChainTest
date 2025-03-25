@@ -1,6 +1,6 @@
 const { ethers } = require("hardhat");
 
-const ZetaStakeAddress = "0x3F15C35E970Cb3881FaAED779e6Df3AB2494E26b"; 
+const ZetaStakeAddress = "0x1036383182c1bd04cfdc88a607ecd2604bFBE83b"; 
 const ZTW = "0x92f0656Bb0CE869F39d91E9E12419d6255bf5507"; //Token Ztw
 
 const ZetaStakeABI = [
@@ -2124,32 +2124,50 @@ const ERC20_ABI = [
     }
   ]; 
 
-async function main() {
-  const [signer] = await ethers.getSigners();
-  const ZetaStake = new ethers.Contract(ZetaStakeAddress, ZetaStakeABI, signer);
-  const ZTWToken = new ethers.Contract(ZTW, ERC20_ABI, signer);
-
-  const amount = ethers.utils.parseUnits("0.0001", 18);
-  const lockDuration = 2 * 60;
-
-  console.log(`⏳ Granting approval for ${ethers.utils.formatUnits(amount, 18)} LP Token...`);
-  let tx = await ZTWToken.approve(ZetaStakeAddress, amount);
-  await tx.wait();
-  console.log("✅ Approval granted!");
-
-  console.log(`⏳ Depositing ${ethers.utils.formatUnits(amount, 18)} LP Token with lock duration: ${lockDuration} seconds...`);
-  tx = await ZetaStake.deposit(
-        amount, 
-        lockDuration, 
-        {
-      gasLimit: 2000000,
-      gasPrice: ethers.utils.parseUnits("20", "gwei"),
-  });
-  await tx.wait();
-  console.log("✅ Deposit successful!");
-  const userInfo = await ZetaStake.userInfo(signer.address);
-console.log("📌 Actual lockEndTime from contract:", userInfo.lockEndTime.toString());
-}
+  async function main() {
+    const [signer] = await ethers.getSigners();
+    const ZetaStake = new ethers.Contract(ZetaStakeAddress, ZetaStakeABI, signer);
+    const ZTWToken = new ethers.Contract(ZTW, ERC20_ABI, signer);
+  
+    const amount = ethers.utils.parseUnits("0.0001", 18);
+    const lockDuration = 2 * 60;
+  
+    // 🔍 Kiểm tra số dư trước khi approve
+    const balance = await ZTWToken.balanceOf(signer.address);
+    if (balance.lt(amount)) {
+      console.error("🚨 Not enough balance for deposit!");
+      return;
+    }
+  
+    console.log(`⏳ Granting approval for ${ethers.utils.formatUnits(amount, 18)} LP Token...`);
+    let tx = await ZTWToken.approve(ZetaStakeAddress, amount);
+    await tx.wait();
+    console.log("✅ Approval granted!");
+  
+    console.log(`⏳ Depositing ${ethers.utils.formatUnits(amount, 18)} LP Token with lock duration: ${lockDuration} seconds...`);
+    tx = await ZetaStake.deposit(
+      amount, 
+      lockDuration, 
+      {
+        gasLimit: 2000000,
+        gasPrice: ethers.utils.parseUnits("20", "gwei"),
+      }
+    );
+  
+    const receipt = await tx.wait();
+    if (receipt.status === 1) {
+      console.log(`🔍 Transaction Hash: ${tx.hash}`);
+      console.log("✅ Deposit successful!");
+    } else {
+      console.error("❌ Deposit failed!");
+    }
+  
+    // 📌 Lấy thông tin từ contract
+    const userInfo = await ZetaStake.userInfo(signer.address);
+    console.log("📌 Actual lockEndTime from contract:", userInfo.lockEndTime.toString());
+    console.log("🔍 Current lockedAmount:", userInfo.lockedAmount.toString());
+console.log("🔍 Current shares:", userInfo.shares.toString());
+  }
 
 main().catch((error) => {
   console.error("❌ Lỗi:", error);
