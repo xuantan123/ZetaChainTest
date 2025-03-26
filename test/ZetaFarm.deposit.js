@@ -1550,7 +1550,7 @@ async function main() {
   const [signer] = await ethers.getSigners();
   const ZetaFarm = new ethers.Contract(ZetaFarmAddress, ZetaFarmABI, signer);
   const lpToken = new ethers.Contract(lpTokenAddress, ERC20_ABI, signer);
-  const ZTWToken = new ethers.Contract(ZTWTokenAddress, ZTW_ABI, signer); // Định nghĩa contract của ZTW token
+  const ZTWToken = new ethers.Contract(ZTWTokenAddress, ZTW_ABI, signer);
 
   let totalPools = await ZetaFarm.poolLength();
   console.log(`🔍 Total Pools Available: ${totalPools.toString()}`);
@@ -1567,12 +1567,7 @@ async function main() {
 
   if (totalPools.toNumber() === 1) {
     console.log("⏳ Adding new pool...");
-    let tx = await ZetaFarm.add(
-      1,               // allocPoint
-      lpTokenAddress,  // LP Token Address
-      true,            // withUpdate
-      false            // isRegular
-    );
+    let tx = await ZetaFarm.add(1, lpTokenAddress, true, false);
     await tx.wait();
     console.log("✅ New Pool has been added!");
   }
@@ -1591,6 +1586,10 @@ async function main() {
   console.log(`   🟢 totalBoostedShare: ${pool.totalBoostedShare.toString()}`);
   console.log(`   🟢 isRegular: ${pool.isRegular}`);
 
+  console.log("⏳ Checking Boost Multiplier...");
+  let boostMultiplier = await ZetaFarm.getBoostMultiplier(signer.address, pid);
+  console.log(`✅ Boost Multiplier: ${boostMultiplier.toString()}`);
+
   console.log(`⏳ Granting permission to send ${ethers.utils.formatUnits(amount, 18)} LP Token into ZetaFarm...`);
   let tx = await lpToken.approve(ZetaFarmAddress, amount);
   await tx.wait();
@@ -1608,31 +1607,40 @@ async function main() {
   await tx.wait();
   console.log("✅ Sent successfully!");
 
-  console.log("⏳ Checking Boost Multiplier...");
-  let boostMultiplier = await ZetaFarm.getBoostMultiplier(signer.address, pid);
-  console.log(`✅ Boost Multiplier: ${boostMultiplier.toString()}`);
+  console.log("⏳ Checking Pool Data after deposit...");
+  const updatedPool = await ZetaFarm.poolInfo(pid);
+  // console.log(`   🟢 accCakePerShare: ${updatedPool.accCakePerShare.toString()}`);
+  // console.log(`   🟢 totalBoostedShare: ${updatedPool.totalBoostedShare.toString()}`);
 
-  let balanceBefore = await ZTWToken.balanceOf(signer.address);
-  console.log(`🔍 ZTW Balance before Harvest: ${ethers.utils.formatUnits(balanceBefore, 18)}`);
+  // let balanceBefore = await ZTWToken.balanceOf(signer.address);
+  // console.log(`🔍 ZTW Balance before Harvest: ${ethers.utils.formatUnits(balanceBefore, 18)}`);
+  
+  // console.log("⏳ Checking pending rewards...");
+  // let pendingRewards = await ZetaFarm.pendingCake(pid, signer.address);
+  // console.log(`🔍 Pending Rewards Before: ${ethers.utils.formatUnits(pendingRewards, 18)}`);
+  
+  // console.log("⏳ Harvesting rewards...");
+  // tx = await ZetaFarm.deposit(
+  //   pid, 
+  //   ethers.utils.parseUnits("0", 18), 
+  //   {     
+  //     gasLimit: 2000000,
+  //     gasPrice: ethers.utils.parseUnits("20", "gwei"),
+  //   }
+  // );
+  // await tx.wait();
+  // console.log("✅ Harvest completed!");
 
-  console.log("⏳ Harvesting rewards...");
-  tx = await ZetaFarm.deposit(
-    pid, 
-    ethers.utils.parseUnits("0", 18), 
-    {     
-      gasLimit: 2000000,
-      gasPrice: ethers.utils.parseUnits("20", "gwei"),
-    }
-  );
-  await tx.wait();
-  console.log("✅ Harvest completed!");
+  // let balanceAfter = await ZTWToken.balanceOf(signer.address);
+  // console.log(`🔍 ZTW Balance after Harvest: ${ethers.utils.formatUnits(balanceAfter, 18)}`);
 
-  let balanceAfter = await ZTWToken.balanceOf(signer.address);
-  console.log(`🔍 ZTW Balance after Harvest: ${ethers.utils.formatUnits(balanceAfter, 18)}`);
+  // let harvestedAmount = balanceAfter.sub(balanceBefore);
+  // console.log(`✅ Total ZTW Harvested: ${ethers.utils.formatUnits(harvestedAmount, 18)}`);
 
-  let harvestedAmount = balanceAfter.sub(balanceBefore);
-  console.log(`✅ Total ZTW Harvested: ${ethers.utils.formatUnits(harvestedAmount, 18)}`);
+  // pendingRewards = await ZetaFarm.pendingCake(pid, signer.address);
+  // console.log(`🔍 Pending Rewards After: ${ethers.utils.formatUnits(pendingRewards, 18)}`);
 }
+
 
 main().catch((error) => {
   console.error("❌ Lỗi:", error);
